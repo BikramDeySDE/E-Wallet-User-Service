@@ -1,6 +1,7 @@
 package com.bikram.E_Wallet.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUsers() {
 		List<User> userList = userRepository.findAll();
 		return userList;
+	}
+
+	@Override
+	public boolean isPresent(Integer userId) {
+		Optional<User> optionalUser = userRepository.findById(userId);
+		if (optionalUser.isPresent()) {
+			return true;
+		}
+		return false;
 	}
 
 }
